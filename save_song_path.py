@@ -15,7 +15,6 @@ def get_song_path():
 
 
 def save_song_path():
-     txt = open(".songslist.txt", "r+")
      pid = int(os.popen('pgrep -x vlc').read())
      process = "readlink /proc/" + str(pid) + "/fd/*"
      files = os.popen(process).read()
@@ -23,6 +22,7 @@ def save_song_path():
      for item in files.split("\n"):
          if "/media/" in item:
              song = song_path = item.strip() + '\n'
+	     txt = open(".songslist.txt", "r+")
              if song_path in txt.read(): # if the song path present in file, increase its frequency by 1
                  byte = len(song_path)
                  txt.seek(-(byte+2), 1)
