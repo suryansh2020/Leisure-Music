@@ -1,4 +1,4 @@
-import os
+import os,time
 from random import randint
 
 def play_song():
@@ -17,5 +17,7 @@ def play_song():
 
 
 if __name__ == "__main__":
-    if int(os.popen('xprintidle').read()) >= 240000: # idle time for 4 minutes
-        play_song()
+    while 1:
+        if int(os.popen('xprintidle').read()) >= 240000: # idle time for 4 minutes
+            play_song()
+        time.sleep(30)
