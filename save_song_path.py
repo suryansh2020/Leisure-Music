@@ -42,13 +42,17 @@ def save_song_path():
 
 def main():
     processname = 'vlc'
-    tmp = os.popen("ps -Af").read()
-    proccount = tmp.count(processname)
-    while proccount > 0:
-        tmp_song = get_song_path()
-        if tmp_song != song:
-            save_song_path()
-        time.sleep(30)
+    while 1:
+	time.sleep(1)
+        tmp = os.popen("ps -Af").read()
+        proccount = tmp.count(processname)
+        while proccount > 0:
+            tmp_song = get_song_path()
+            if tmp_song != song:
+                save_song_path()
+            time.sleep(30)
+            tmp = os.popen("ps -Af").read()
+            proccount = tmp.count(processname)
 
 
 
