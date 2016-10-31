@@ -17,4 +17,5 @@ def play_song():
 
 
 if __name__ == "__main__":
-    play_song()
+    if int(os.popen('xprintidle').read()) >= 240000: # idle time for 4 minutes
+        play_song()
