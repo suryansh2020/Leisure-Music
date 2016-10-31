@@ -1,4 +1,4 @@
-import os,time
+import os
 from random import randint
 
 def play_song():
