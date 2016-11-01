@@ -11,7 +11,7 @@ def get_song_path():
     process = "readlink /proc/" + str(pid) + "/fd/*"
     files = os.popen(process).read()
     for item in files.split("\n"):
-        if "/media/" in item:
+        if "/run/" in item:
             song_path = item.strip() + '\n'
             return song_path
 
@@ -22,7 +22,7 @@ def save_song_path():
      process = "readlink /proc/" + str(pid) + "/fd/*"
      files = os.popen(process).read()
      for item in files.split("\n"):
-         if "/media/" in item:
+         if "/run/" in item:
              global song
              song = song_path = item.strip() + '\n'
              txt = open(".songslist.txt", "r+")
