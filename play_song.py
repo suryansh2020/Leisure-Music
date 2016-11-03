@@ -1,3 +1,4 @@
+#! usr/bin/env python
 import os,time
 from random import randint
 
