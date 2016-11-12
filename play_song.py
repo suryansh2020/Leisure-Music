@@ -1,4 +1,4 @@
-#! usr/bin/env python
+#! /usr/bin/env python
 import os,time
 from random import randint
 
@@ -14,11 +14,22 @@ def play_song():
     average = sum / count
     #average is calculated
 
-
+    txt.seek(0);
+    data = txt.readline()
+    txt.close()
+    a = 0
+    b = len(data) - 2
+    while 1:
+        c = randint(a,b)
+        if c % 2 == 0:
+            if data[c] >= average:
+                song = 'vlc ' + '"' + data[c+1] + '"'
+                os.popen(song)
+                break
 
 
 if __name__ == "__main__":
     while 1:
-        if int(os.popen('xprintidle').read()) >= 240000: # idle time for 4 minutes
+        if int(os.popen('xprintidle').read()) >= 180000: # idle time for 3 minutes
             play_song()
-        time.sleep(30)
+        time.sleep(60)

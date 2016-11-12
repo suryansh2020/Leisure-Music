@@ -1,4 +1,4 @@
-#! usr/bin/env python
+#! /usr/bin/env python
 import os,time
 
 song = ''
@@ -25,16 +25,26 @@ def save_song_path():
      for item in files.split("\n"):
          if "/run/" in item:
              global song
-             song = song_path = item.strip() + '\n'
-             txt = open(".songslist.txt", "r+")
+             song = song_path = item.strip() + "\n"
+             txt = open(".songslist.txt", "r")
              if song_path in txt.read(): # if the song path present in file, increase its frequency by 1
-                 byte = len(song_path)
-                 txt.seek(-(byte+2), 1)
-                 freq = int(txt.readline())
-                 freq = freq + 1
-                 txt.seek(-2,1)
-                 txt.write(str(freq))
-                 txt.close()
+                txt.seek(0)
+                data = txt.readlines()
+                txt.close()
+                i = 0
+                prevline = None
+                for line in data:
+                    if song_path == line:
+                        freq = int(prevline)
+                        freq = freq + 1
+                        data[i-1] = str(freq) + "\n"
+                        f = open(".songslist.txt","w")
+                        f.write(''.join(data))
+                        f.close()
+                    i = i + 1
+                    prevline = line.strip("\n")
+
+
 
              else:                 # appending the song path to the list
                  txt = open(".songslist.txt", "a")
