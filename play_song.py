@@ -14,22 +14,20 @@ def play_song():
     average = sum / count
     #average is calculated
 
-    txt.seek(0);
-    data = txt.readline()
     txt.close()
     a = 0
-    b = len(data) - 2
+    b = len(song_list) - 2
     while 1:
         c = randint(a,b)
         if c % 2 == 0:
-            if data[c] >= average:
-                song = 'vlc ' + '"' + data[c+1] + '"'
+            if int(song_list[c]) >= average:
+                song = 'vlc ' + '"' + song_list[c+1] + '"'
                 os.popen(song)
                 break
 
 
 if __name__ == "__main__":
     while 1:
-        if int(os.popen('xprintidle').read()) >= 180000: # idle time for 3 minutes
+        if int(os.popen('xssstate -i').read()) >= 180000: # idle time for 3 minutes
             play_song()
         time.sleep(60)
